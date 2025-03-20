@@ -1,0 +1,304 @@
+#!/usr/bin/env python3
+import argparse
+import chess
+import chess.pgn
+import requests
+import logging
+
+##############################
+# PHASE 1: Build Repertoire Trees
+##############################
+
+def setup_logging(verbose):
+    if verbose:
+        logging.basicConfig(filename="debug.log",
+                            level=logging.DEBUG,
+                            format="%(asctime)s - %(levelname)s - %(message)s")
+        logging.debug("Debug logging enabled.")
+    else:
+        logging.basicConfig(level=logging.WARNING)
+
+def insert_game_white(tree, game):
+    """
+    Insert one game (variation) from the white repertoire.
+    For every move when it is White’s turn, record the current board’s FEN as key
+    and White’s move (in UCI) with the resulting child FEN as the branch.
+    """
+    board = chess.Board()
+    for move in game.mainline_moves():
+        if board.turn == chess.WHITE:
+            fen = board.fen()
+            move_uci = move.uci()
+            board.push(move)
+            child_fen = board.fen()
+            if fen not in tree:
+                tree[fen] = {}
+            # If the move is already there, we leave it as is.
+            if move_uci not in tree[fen]:
+                tree[fen][move_uci] = child_fen
+            logging.debug(f"White tree: At FEN '{fen}', added move '{move_uci}' -> '{child_fen}'")
+        else:
+            board.push(move)
+
+def build_white_tree(filename):
+    """
+    Build a white repertoire tree from the PGN file.
+    Returns a dictionary where each key is a FEN and its value is a dictionary of
+    candidate white moves (in UCI) mapping to the child FEN.
+    """
+    tree = {}
+    game_count = 0
+    with open(filename, 'r') as pgn_file:
+        while True:
+            game = chess.pgn.read_game(pgn_file)
+            if game is None:
+                break
+            game_count += 1
+            insert_game_white(tree, game)
+    logging.debug(f"White repertoire: Loaded {game_count} games with {len(tree)} unique positions.")
+    return tree
+
+def insert_game_black(tree, game):
+    """
+    Insert one game from the black repertoire.
+    For every move when it is Black’s turn, record the current board’s FEN (after White’s move)
+    as key and Black’s move (in UCI) mapping to the resulting child FEN.
+    """
+    board = chess.Board()
+    for move in game.mainline_moves():
+        if board.turn == chess.WHITE:
+            board.push(move)
+        else:
+            fen = board.fen()
+            move_uci = move.uci()
+            board.push(move)
+            child_fen = board.fen()
+            if fen not in tree:
+                tree[fen] = {}
+            if move_uci not in tree[fen]:
+                tree[fen][move_uci] = child_fen
+            logging.debug(f"Black tree: At FEN '{fen}', added move '{move_uci}' -> '{child_fen}'")
+    # End of game.
+
+def build_black_tree(filename):
+    """
+    Build a black repertoire tree from the PGN file.
+    Returns a dictionary where each key is a FEN (after White’s move) and its value is a dictionary of
+    candidate black moves (in UCI) mapping to the resulting child FEN.
+    """
+    tree = {}
+    game_count = 0
+    with open(filename, 'r') as pgn_file:
+        while True:
+            game = chess.pgn.read_game(pgn_file)
+            if game is None:
+                break
+            game_count += 1
+            insert_game_black(tree, game)
+    logging.debug(f"Black repertoire: Loaded {game_count} games with {len(tree)} unique positions.")
+    return tree
+
+##############################
+# PHASE 2: Simulate the Opening
+##############################
+
+def simulate_game(white_tree, black_tree):
+    """
+    Simulate a game by alternating moves using the repertoire trees.
+    - If it's White's turn, look up the current board's FEN in the white_tree and pick a move.
+    - If it's Black's turn, do likewise using the black_tree.
+    Continue until the current board's FEN is not found in the respective tree.
+    
+    Returns a tuple (board, san_sequence) where san_sequence is the list of moves in SAN.
+    """
+    board = chess.Board()
+    san_sequence = []
+    
+    while True:
+        current_fen = board.fen()
+        if board.turn == chess.WHITE:
+            # Look up white's move
+            if current_fen in white_tree and white_tree[current_fen]:
+                # For now, select the first candidate move (dictionary iteration order)
+                candidate = list(white_tree[current_fen].keys())[0]
+                move = chess.Move.from_uci(candidate)
+                if move not in board.legal_moves:
+                    logging.debug(f"White candidate {candidate} illegal at FEN: {current_fen}")
+                    break
+                san = board.san(move)
+                san_sequence.append(san)
+                board.push(move)
+                logging.debug(f"White plays {candidate} ({san}); New FEN: {board.fen()}")
+            else:
+                logging.debug(f"White out-of-book at FEN: {current_fen}")
+                break
+        else:  # Black's turn
+            if current_fen in black_tree and black_tree[current_fen]:
+                candidate = list(black_tree[current_fen].keys())[0]
+                move = chess.Move.from_uci(candidate)
+                if move not in board.legal_moves:
+                    logging.debug(f"Black candidate {candidate} illegal at FEN: {current_fen}")
+                    break
+                san = board.san(move)
+                san_sequence.append(san)
+                board.push(move)
+                logging.debug(f"Black plays {candidate} ({san}); New FEN: {board.fen()}")
+            else:
+                logging.debug(f"Black out-of-book at FEN: {current_fen}")
+                break
+    logging.debug(f"Final move sequence: {format_san_sequence(san_sequence)}")
+    return board, san_sequence
+
+def format_san_sequence(san_seq):
+    """
+    Given a list of SAN half-moves, produce a string with move numbers.
+    For example, ['e4', 'e5', 'Nf3', 'Nc6'] becomes "1.e4 e5 2.Nf3 Nc6"
+    (with no space after the move number).
+    """
+    moves = []
+    move_num = 1
+    i = 0
+    while i < len(san_seq):
+        if i + 1 < len(san_seq):
+            moves.append(f"{move_num}.{san_seq[i]} {san_seq[i+1]}")
+            i += 2
+        else:
+            moves.append(f"{move_num}.{san_seq[i]}")
+            i += 1
+        move_num += 1
+    return " ".join(moves)
+
+##############################
+# PHASE 3: Lichess Explorer API Lookup
+##############################
+
+def query_lichess(fen, ratings):
+    """
+    Query the Lichess Explorer API using the given FEN and ratings.
+    Returns a tuple: (white_wins, draws, black_wins, total, api_data)
+    where api_data is the full JSON response.
+    """
+    params = {
+        "variant": "standard",
+        "speeds": "blitz,rapid,classical",
+        "ratings": ratings,
+        "fen": fen
+    }
+    api_url = "https://explorer.lichess.ovh/lichess"
+    response = requests.get(api_url, params=params)
+    response.raise_for_status()
+    data = response.json()
+    white_wins = data.get("white", 0)
+    draws = data.get("draws", 0)
+    black_wins = data.get("black", 0)
+    total = white_wins + draws + black_wins
+    return white_wins, draws, black_wins, total, data
+
+def print_moves_table(moves):
+    """
+    Given the candidate moves list from the API (each a dict), print a formatted table
+    showing for each candidate move its white/draw/black counts and percentages.
+    """
+    header = (f"{'Move':<12} {'White':>10} {'Draws':>10} {'Black':>10} {'Total':>10} "
+              f"{'W%':>8} {'D%':>8} {'B%':>8}")
+    print("\nCandidate Moves:")
+    print(header)
+    print("-" * len(header))
+    for m in moves:
+        move_str = m.get("san", m.get("uci", ""))
+        w = m.get("white", 0)
+        d = m.get("draws", 0)
+        b = m.get("black", 0)
+        tot = w + d + b
+        if tot > 0:
+            wp = w / tot * 100
+            dp = d / tot * 100
+            bp = b / tot * 100
+        else:
+            wp = dp = bp = 0
+        print(f"{move_str:<12} {w:10} {d:10} {b:10} {tot:10} "
+              f"{wp:7.1f}% {dp:7.1f}% {bp:7.1f}%")
+
+##############################
+# MAIN FUNCTION: PHASES 1, 2, & 3
+##############################
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Opening Arena: Load repertoires, simulate game, and query Lichess Explorer API."
+    )
+    parser.add_argument('-w', '--white', required=True, help="White repertoire PGN file")
+    parser.add_argument('-b', '--black', required=True, help="Black repertoire PGN file")
+    parser.add_argument('-e', '--elo', required=True,
+                        help="Comma separated ELO brackets (e.g. 1200,1400,1600,1800)")
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help="Enable verbose debug logging to debug.log")
+    args = parser.parse_args()
+
+    setup_logging(args.verbose)
+
+    # Phase 1: Load repertoires into trees.
+    logging.debug("Building white repertoire tree...")
+    white_tree = build_white_tree(args.white)
+    logging.debug("Building black repertoire tree...")
+    black_tree = build_black_tree(args.black)
+
+    # Phase 2: Simulate the game.
+    board, san_sequence = simulate_game(white_tree, black_tree)
+    final_fen = board.fen()
+    print("White:", args.white)
+    print("Black:", args.black)
+    print("Final FEN:", final_fen)
+
+    if san_sequence:
+        moves_played = format_san_sequence(san_sequence)
+        print("\nMoves played to reach this position:")
+        print(moves_played)
+        logging.debug(f"Moves played: {moves_played}")
+    else:
+        print("\nNo moves were played (empty repertoire?)")
+        logging.debug("No moves were played.")
+
+    # Phase 3: Lichess Explorer API lookup.
+    if board.is_checkmate():
+        # If mate, force stats.
+        if board.turn == chess.WHITE:
+            white_wins, draws, black_wins = 0, 0, 1
+        else:
+            white_wins, draws, black_wins = 1, 0, 0
+        total = 1
+        print("\nResult (Mate):")
+        print(f"Overall: {white_wins}/{draws}/{black_wins} = {total} = "
+              f"{white_wins*100:.1f}%/{draws*100:.1f}%/{black_wins*100:.1f}%")
+        logging.debug("Mate reached; simulation ended.")
+        print("\n(Mate reached; no candidate moves table available.)")
+    else:
+        try:
+            white_wins, draws, black_wins, total, api_data = query_lichess(final_fen, args.elo.replace(" ", ""))
+        except Exception as e:
+            logging.debug(f"API request failed: {e}")
+            print("API request failed:", e)
+            return
+
+        if total > 0:
+            overall_wp = white_wins / total * 100
+            overall_dp = draws / total * 100
+            overall_bp = black_wins / total * 100
+        else:
+            overall_wp = overall_dp = overall_bp = 0
+
+        print("\nOverall Result from Lichess Explorer:")
+        print(f"Overall: {white_wins}/{draws}/{black_wins} = {total} = "
+              f"{overall_wp:.1f}%/{overall_dp:.1f}%/{overall_bp:.1f}%")
+        logging.debug(f"Overall API result: {white_wins}/{draws}/{black_wins} = {total}")
+
+        moves = api_data.get("moves", [])
+        if moves:
+            print_moves_table(moves)
+            logging.debug("Candidate moves table printed.")
+        else:
+            print("No candidate moves available in the API response.")
+            logging.debug("No candidate moves available from API.")
+
+if __name__ == '__main__':
+    main()

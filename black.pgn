@@ -1,0 +1,23 @@
+[Event "?"]
+[Site "?"]
+[Date "2025.03.20"]
+[Round "?"]
+[White "Scholar's Mate"]
+[Black "?"]
+[Result "1-0"]
+[ECO "C20"]
+[PlyCount "6"]
+
+1.e4 e5 2.Qh5 Nc6 3.Bc4 Nf6 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2025.03.20"]
+[Round "?"]
+[White "Fool's Mate"]
+[Black "?"]
+[Result "0-1"]
+[ECO "A00"]
+[PlyCount "4"]
+
+1.f3 e5 2.g4 Qh4# 0-1

@@ -1,0 +1,129 @@
+2025-03-20 15:54:47,121 - DEBUG - Debug logging enabled.
+2025-03-20 15:54:47,121 - DEBUG - Building white repertoire tree...
+2025-03-20 15:54:47,122 - DEBUG - White tree: At FEN 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', added move 'e2e4' -> 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1'
+2025-03-20 15:54:47,122 - DEBUG - White tree: At FEN 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2', added move 'd1h5' -> 'rnbqkbnr/pppp1ppp/8/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR b KQkq - 1 2'
+2025-03-20 15:54:47,122 - DEBUG - White tree: At FEN 'r1bqkbnr/pppp1ppp/2n5/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR w KQkq - 2 3', added move 'f1c4' -> 'r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3'
+2025-03-20 15:54:47,123 - DEBUG - White tree: At FEN 'r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4', added move 'h5f7' -> 'r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4'
+2025-03-20 15:54:47,123 - DEBUG - White repertoire: Loaded 1 games with 4 unique positions.
+2025-03-20 15:54:47,123 - DEBUG - Building black repertoire tree...
+2025-03-20 15:54:47,123 - DEBUG - Black tree: At FEN 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1', added move 'e7e5' -> 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2'
+2025-03-20 15:54:47,124 - DEBUG - Black tree: At FEN 'rnbqkbnr/pppp1ppp/8/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR b KQkq - 1 2', added move 'b8c6' -> 'r1bqkbnr/pppp1ppp/2n5/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR w KQkq - 2 3'
+2025-03-20 15:54:47,124 - DEBUG - Black tree: At FEN 'r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3', added move 'g8f6' -> 'r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4'
+2025-03-20 15:54:47,124 - DEBUG - Black repertoire: Loaded 1 games with 3 unique positions.
+2025-03-20 15:54:47,124 - DEBUG - White plays e2e4 (e4); New FEN: rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1
+2025-03-20 15:54:47,124 - DEBUG - Black plays e7e5 (e5); New FEN: rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2
+2025-03-20 15:54:47,124 - DEBUG - White plays d1h5 (Qh5); New FEN: rnbqkbnr/pppp1ppp/8/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR b KQkq - 1 2
+2025-03-20 15:54:47,125 - DEBUG - Black plays b8c6 (Nc6); New FEN: r1bqkbnr/pppp1ppp/2n5/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR w KQkq - 2 3
+2025-03-20 15:54:47,125 - DEBUG - White plays f1c4 (Bc4); New FEN: r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3
+2025-03-20 15:54:47,125 - DEBUG - Black plays g8f6 (Nf6); New FEN: r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4
+2025-03-20 15:54:47,125 - DEBUG - White plays h5f7 (Qxf7#); New FEN: r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4
+2025-03-20 15:54:47,125 - DEBUG - Black out-of-book at FEN: r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4
+2025-03-20 15:54:47,126 - DEBUG - Final move sequence: 1.e4 e5 2.Qh5 Nc6 3.Bc4 Nf6 4.Qxf7#
+2025-03-20 15:54:47,126 - DEBUG - Moves played: 1.e4 e5 2.Qh5 Nc6 3.Bc4 Nf6 4.Qxf7#
+2025-03-20 15:54:47,126 - DEBUG - Mate reached; simulation ended.
+2025-03-20 15:54:47,449 - DEBUG - Debug logging enabled.
+2025-03-20 15:54:47,449 - DEBUG - Building white repertoire tree...
+2025-03-20 15:54:47,450 - DEBUG - White tree: At FEN 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', added move 'e2e4' -> 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1'
+2025-03-20 15:54:47,450 - DEBUG - White tree: At FEN 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2', added move 'd1h5' -> 'rnbqkbnr/pppp1ppp/8/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR b KQkq - 1 2'
+2025-03-20 15:54:47,450 - DEBUG - White tree: At FEN 'r1bqkbnr/pppp1ppp/2n5/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR w KQkq - 2 3', added move 'f1c4' -> 'r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3'
+2025-03-20 15:54:47,450 - DEBUG - White tree: At FEN 'r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4', added move 'h5f7' -> 'r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4'
+2025-03-20 15:54:47,450 - DEBUG - White repertoire: Loaded 1 games with 4 unique positions.
+2025-03-20 15:54:47,450 - DEBUG - Building black repertoire tree...
+2025-03-20 15:54:47,451 - DEBUG - Black tree: At FEN 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1', added move 'e7e5' -> 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2'
+2025-03-20 15:54:47,451 - DEBUG - Black tree: At FEN 'rnbqkbnr/pppp1ppp/8/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR b KQkq - 1 2', added move 'b8c6' -> 'r1bqkbnr/pppp1ppp/2n5/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR w KQkq - 2 3'
+2025-03-20 15:54:47,451 - DEBUG - Black tree: At FEN 'r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3', added move 'g7g6' -> 'r1bqkbnr/pppp1p1p/2n3p1/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 0 4'
+2025-03-20 15:54:47,452 - DEBUG - Black tree: At FEN 'r1bqkbnr/pppp1p1p/2n3p1/4p3/2B1P3/5Q2/PPPP1PPP/RNB1K1NR b KQkq - 1 4', added move 'g8f6' -> 'r1bqkb1r/pppp1p1p/2n2np1/4p3/2B1P3/5Q2/PPPP1PPP/RNB1K1NR w KQkq - 2 5'
+2025-03-20 15:54:47,452 - DEBUG - Black repertoire: Loaded 1 games with 4 unique positions.
+2025-03-20 15:54:47,452 - DEBUG - White plays e2e4 (e4); New FEN: rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1
+2025-03-20 15:54:47,452 - DEBUG - Black plays e7e5 (e5); New FEN: rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2
+2025-03-20 15:54:47,452 - DEBUG - White plays d1h5 (Qh5); New FEN: rnbqkbnr/pppp1ppp/8/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR b KQkq - 1 2
+2025-03-20 15:54:47,453 - DEBUG - Black plays b8c6 (Nc6); New FEN: r1bqkbnr/pppp1ppp/2n5/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR w KQkq - 2 3
+2025-03-20 15:54:47,453 - DEBUG - White plays f1c4 (Bc4); New FEN: r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3
+2025-03-20 15:54:47,453 - DEBUG - Black plays g7g6 (g6); New FEN: r1bqkbnr/pppp1p1p/2n3p1/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 0 4
+2025-03-20 15:54:47,453 - DEBUG - White out-of-book at FEN: r1bqkbnr/pppp1p1p/2n3p1/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 0 4
+2025-03-20 15:54:47,453 - DEBUG - Final move sequence: 1.e4 e5 2.Qh5 Nc6 3.Bc4 g6
+2025-03-20 15:54:47,453 - DEBUG - Moves played: 1.e4 e5 2.Qh5 Nc6 3.Bc4 g6
+2025-03-20 15:54:47,462 - DEBUG - Starting new HTTPS connection (1): explorer.lichess.ovh:443
+2025-03-20 15:54:47,968 - DEBUG - https://explorer.lichess.ovh:443 "GET /lichess?variant=standard&speeds=blitz%2Crapid%2Cclassical&ratings=1200%2C1400%2C1600%2C1800&fen=r1bqkbnr%2Fpppp1p1p%2F2n3p1%2F4p2Q%2F2B1P3%2F8%2FPPPP1PPP%2FRNB1K1NR+w+KQkq+-+0+4 HTTP/1.1" 200 None
+2025-03-20 15:54:47,970 - DEBUG - Overall API result: 2688994/215840/2664786 = 5569620
+2025-03-20 15:54:47,970 - DEBUG - Candidate moves table printed.
+2025-03-20 15:54:48,285 - DEBUG - Debug logging enabled.
+2025-03-20 15:54:48,285 - DEBUG - Building white repertoire tree...
+2025-03-20 15:54:48,285 - DEBUG - White tree: At FEN 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', added move 'e2e4' -> 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1'
+2025-03-20 15:54:48,285 - DEBUG - White tree: At FEN 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2', added move 'g1f3' -> 'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2'
+2025-03-20 15:54:48,286 - DEBUG - White tree: At FEN 'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3', added move 'f1b5' -> 'r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3'
+2025-03-20 15:54:48,286 - DEBUG - White tree: At FEN 'r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4', added move 'b5a4' -> 'r1bqkbnr/1ppp1ppp/p1n5/4p3/B3P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 1 4'
+2025-03-20 15:54:48,286 - DEBUG - White tree: At FEN 'r1bqkb1r/1ppp1ppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 2 5', added move 'e1g1' -> 'r1bqkb1r/1ppp1ppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 3 5'
+2025-03-20 15:54:48,286 - DEBUG - White repertoire: Loaded 1 games with 5 unique positions.
+2025-03-20 15:54:48,286 - DEBUG - Building black repertoire tree...
+2025-03-20 15:54:48,286 - DEBUG - Black tree: At FEN 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1', added move 'e7e5' -> 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2'
+2025-03-20 15:54:48,286 - DEBUG - Black tree: At FEN 'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2', added move 'b8c6' -> 'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3'
+2025-03-20 15:54:48,286 - DEBUG - Black tree: At FEN 'r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3', added move 'g8f6' -> 'r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4'
+2025-03-20 15:54:48,286 - DEBUG - Black tree: At FEN 'r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 5 4', added move 'f8e7' -> 'r1bqk2r/ppppbppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQ1RK1 w kq - 6 5'
+2025-03-20 15:54:48,286 - DEBUG - Black tree: At FEN 'r1bqk2r/ppppbppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 7 5', added move 'e8g8' -> 'r1bq1rk1/ppppbppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQR1K1 w - - 8 6'
+2025-03-20 15:54:48,286 - DEBUG - Black repertoire: Loaded 1 games with 5 unique positions.
+2025-03-20 15:54:48,286 - DEBUG - White plays e2e4 (e4); New FEN: rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1
+2025-03-20 15:54:48,287 - DEBUG - Black plays e7e5 (e5); New FEN: rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2
+2025-03-20 15:54:48,287 - DEBUG - White plays g1f3 (Nf3); New FEN: rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2
+2025-03-20 15:54:48,287 - DEBUG - Black plays b8c6 (Nc6); New FEN: r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3
+2025-03-20 15:54:48,287 - DEBUG - White plays f1b5 (Bb5); New FEN: r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3
+2025-03-20 15:54:48,287 - DEBUG - Black plays g8f6 (Nf6); New FEN: r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4
+2025-03-20 15:54:48,287 - DEBUG - White out-of-book at FEN: r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4
+2025-03-20 15:54:48,287 - DEBUG - Final move sequence: 1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6
+2025-03-20 15:54:48,287 - DEBUG - Moves played: 1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6
+2025-03-20 15:54:48,295 - DEBUG - Starting new HTTPS connection (1): explorer.lichess.ovh:443
+2025-03-20 15:54:48,806 - DEBUG - https://explorer.lichess.ovh:443 "GET /lichess?variant=standard&speeds=blitz%2Crapid%2Cclassical&ratings=1200%2C1400%2C1600%2C1800&fen=r1bqkb1r%2Fpppp1ppp%2F2n2n2%2F1B2p3%2F4P3%2F5N2%2FPPPP1PPP%2FRNBQK2R+w+KQkq+-+4+4 HTTP/1.1" 200 None
+2025-03-20 15:54:48,808 - DEBUG - Overall API result: 7965305/657468/6573072 = 15195845
+2025-03-20 15:54:48,808 - DEBUG - Candidate moves table printed.
+2025-03-20 15:54:49,140 - DEBUG - Debug logging enabled.
+2025-03-20 15:54:49,140 - DEBUG - Building white repertoire tree...
+2025-03-20 15:54:49,140 - DEBUG - White tree: At FEN 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', added move 'e2e4' -> 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1'
+2025-03-20 15:54:49,140 - DEBUG - White repertoire: Loaded 1 games with 1 unique positions.
+2025-03-20 15:54:49,140 - DEBUG - Building black repertoire tree...
+2025-03-20 15:54:49,140 - DEBUG - Black tree: At FEN 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1', added move 'e7e5' -> 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2'
+2025-03-20 15:54:49,140 - DEBUG - Black repertoire: Loaded 1 games with 1 unique positions.
+2025-03-20 15:54:49,140 - DEBUG - White plays e2e4 (e4); New FEN: rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1
+2025-03-20 15:54:49,140 - DEBUG - Black plays e7e5 (e5); New FEN: rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2
+2025-03-20 15:54:49,140 - DEBUG - White out-of-book at FEN: rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2
+2025-03-20 15:54:49,140 - DEBUG - Final move sequence: 1.e4 e5
+2025-03-20 15:54:49,141 - DEBUG - Moves played: 1.e4 e5
+2025-03-20 15:54:49,149 - DEBUG - Starting new HTTPS connection (1): explorer.lichess.ovh:443
+2025-03-20 15:54:49,700 - DEBUG - https://explorer.lichess.ovh:443 "GET /lichess?variant=standard&speeds=blitz%2Crapid%2Cclassical&ratings=1200%2C1400%2C1600%2C1800&fen=rnbqkbnr%2Fpppp1ppp%2F8%2F4p3%2F4P3%2F8%2FPPPP1PPP%2FRNBQKBNR+w+KQkq+-+0+2 HTTP/1.1" 200 None
+2025-03-20 15:54:49,702 - DEBUG - Overall API result: 439148759/34649259/385368619 = 859166637
+2025-03-20 15:54:49,702 - DEBUG - Candidate moves table printed.
+2025-03-20 15:54:50,025 - DEBUG - Debug logging enabled.
+2025-03-20 15:54:50,025 - DEBUG - Building white repertoire tree...
+2025-03-20 15:54:50,026 - DEBUG - White tree: At FEN 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', added move 'f2f3' -> 'rnbqkbnr/pppppppp/8/8/8/5P2/PPPPP1PP/RNBQKBNR b KQkq - 0 1'
+2025-03-20 15:54:50,026 - DEBUG - White tree: At FEN 'rnbqkbnr/ppp1pppp/8/3p4/8/5P2/PPPPP1PP/RNBQKBNR w KQkq - 0 2', added move 'g2g4' -> 'rnbqkbnr/ppp1pppp/8/3p4/6P1/5P2/PPPPP2P/RNBQKBNR b KQkq - 0 2'
+2025-03-20 15:54:50,026 - DEBUG - White repertoire: Loaded 1 games with 2 unique positions.
+2025-03-20 15:54:50,026 - DEBUG - Building black repertoire tree...
+2025-03-20 15:54:50,026 - DEBUG - Black tree: At FEN 'rnbqkbnr/pppppppp/8/8/8/5P2/PPPPP1PP/RNBQKBNR b KQkq - 0 1', added move 'e7e5' -> 'rnbqkbnr/pppp1ppp/8/4p3/8/5P2/PPPPP1PP/RNBQKBNR w KQkq - 0 2'
+2025-03-20 15:54:50,026 - DEBUG - Black tree: At FEN 'rnbqkbnr/pppp1ppp/8/4p3/6P1/5P2/PPPPP2P/RNBQKBNR b KQkq - 0 2', added move 'd8h4' -> 'rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR w KQkq - 1 3'
+2025-03-20 15:54:50,026 - DEBUG - Black repertoire: Loaded 1 games with 2 unique positions.
+2025-03-20 15:54:50,026 - DEBUG - White plays f2f3 (f3); New FEN: rnbqkbnr/pppppppp/8/8/8/5P2/PPPPP1PP/RNBQKBNR b KQkq - 0 1
+2025-03-20 15:54:50,026 - DEBUG - Black plays e7e5 (e5); New FEN: rnbqkbnr/pppp1ppp/8/4p3/8/5P2/PPPPP1PP/RNBQKBNR w KQkq - 0 2
+2025-03-20 15:54:50,026 - DEBUG - White out-of-book at FEN: rnbqkbnr/pppp1ppp/8/4p3/8/5P2/PPPPP1PP/RNBQKBNR w KQkq - 0 2
+2025-03-20 15:54:50,026 - DEBUG - Final move sequence: 1.f3 e5
+2025-03-20 15:54:50,027 - DEBUG - Moves played: 1.f3 e5
+2025-03-20 15:54:50,035 - DEBUG - Starting new HTTPS connection (1): explorer.lichess.ovh:443
+2025-03-20 15:54:50,543 - DEBUG - https://explorer.lichess.ovh:443 "GET /lichess?variant=standard&speeds=blitz%2Crapid%2Cclassical&ratings=1200%2C1400%2C1600%2C1800&fen=rnbqkbnr%2Fpppp1ppp%2F8%2F4p3%2F8%2F5P2%2FPPPPP1PP%2FRNBQKBNR+w+KQkq+-+0+2 HTTP/1.1" 200 None
+2025-03-20 15:54:50,545 - DEBUG - Overall API result: 289325/29541/422863 = 741729
+2025-03-20 15:54:50,545 - DEBUG - Candidate moves table printed.
+2025-03-20 15:54:50,868 - DEBUG - Debug logging enabled.
+2025-03-20 15:54:50,868 - DEBUG - Building white repertoire tree...
+2025-03-20 15:54:50,868 - DEBUG - White tree: At FEN 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', added move 'f2f3' -> 'rnbqkbnr/pppppppp/8/8/8/5P2/PPPPP1PP/RNBQKBNR b KQkq - 0 1'
+2025-03-20 15:54:50,868 - DEBUG - White tree: At FEN 'rnbqkbnr/ppp1pppp/8/3p4/8/5P2/PPPPP1PP/RNBQKBNR w KQkq - 0 2', added move 'g2g3' -> 'rnbqkbnr/ppp1pppp/8/3p4/8/5PP1/PPPPP2P/RNBQKBNR b KQkq - 0 2'
+2025-03-20 15:54:50,868 - DEBUG - White repertoire: Loaded 1 games with 2 unique positions.
+2025-03-20 15:54:50,868 - DEBUG - Building black repertoire tree...
+2025-03-20 15:54:50,868 - DEBUG - Black tree: At FEN 'rnbqkbnr/pppppppp/8/8/8/5P2/PPPPP1PP/RNBQKBNR b KQkq - 0 1', added move 'e7e5' -> 'rnbqkbnr/pppp1ppp/8/4p3/8/5P2/PPPPP1PP/RNBQKBNR w KQkq - 0 2'
+2025-03-20 15:54:50,868 - DEBUG - Black tree: At FEN 'rnbqkbnr/pppp1ppp/8/4p3/6P1/5P2/PPPPP2P/RNBQKBNR b KQkq - 0 2', added move 'd8h4' -> 'rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR w KQkq - 1 3'
+2025-03-20 15:54:50,868 - DEBUG - Black repertoire: Loaded 1 games with 2 unique positions.
+2025-03-20 15:54:50,869 - DEBUG - White plays f2f3 (f3); New FEN: rnbqkbnr/pppppppp/8/8/8/5P2/PPPPP1PP/RNBQKBNR b KQkq - 0 1
+2025-03-20 15:54:50,869 - DEBUG - Black plays e7e5 (e5); New FEN: rnbqkbnr/pppp1ppp/8/4p3/8/5P2/PPPPP1PP/RNBQKBNR w KQkq - 0 2
+2025-03-20 15:54:50,869 - DEBUG - White out-of-book at FEN: rnbqkbnr/pppp1ppp/8/4p3/8/5P2/PPPPP1PP/RNBQKBNR w KQkq - 0 2
+2025-03-20 15:54:50,869 - DEBUG - Final move sequence: 1.f3 e5
+2025-03-20 15:54:50,869 - DEBUG - Moves played: 1.f3 e5
+2025-03-20 15:54:50,877 - DEBUG - Starting new HTTPS connection (1): explorer.lichess.ovh:443
+2025-03-20 15:54:51,401 - DEBUG - https://explorer.lichess.ovh:443 "GET /lichess?variant=standard&speeds=blitz%2Crapid%2Cclassical&ratings=1200%2C1400%2C1600%2C1800&fen=rnbqkbnr%2Fpppp1ppp%2F8%2F4p3%2F8%2F5P2%2FPPPPP1PP%2FRNBQKBNR+w+KQkq+-+0+2 HTTP/1.1" 200 None
+2025-03-20 15:54:51,403 - DEBUG - Overall API result: 289325/29541/422863 = 741729
+2025-03-20 15:54:51,403 - DEBUG - Candidate moves table printed.
