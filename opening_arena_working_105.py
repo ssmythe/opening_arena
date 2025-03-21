@@ -55,6 +55,7 @@ def process_white_node(node, board, tree):
 def build_white_tree(filename):
     tree = RepertoireTree()
     game_count = 0
+    # Use UTF-8 with errors replaced.
     with open(filename, 'r', encoding='utf-8', errors='replace') as pgn_file:
         while True:
             game = chess.pgn.read_game(pgn_file)
@@ -74,7 +75,7 @@ def process_black_node(node, board, tree):
     for variation in node.variations:
         move = variation.move
         if board.turn == chess.BLACK:
-            key_fen = board.fen()
+            key_fen = board.fen()  # FEN after White's move
             move_uci = move.uci()
             new_board = board.copy()
             if move in new_board.legal_moves:
@@ -131,7 +132,7 @@ def format_san_sequence(san_seq):
 def simulate_game(white_tree, black_tree):
     """
     Simulate a game using the repertoire trees.
-    If it's White's turn, look up board.fen() in white_tree; if found, play the first candidate move.
+    If it’s White’s turn, look up board.fen() in white_tree; if found, play the first candidate move.
     Similarly for Black.
     """
     board = chess.Board()
@@ -195,16 +196,16 @@ def print_moves_table(moves, current_move_number, is_white_turn):
     print(header)
     print("-" * len(header))
     for m in moves:
-        # Get candidate move in SAN if available (ensure no extra space after period)
+        # Get the candidate move (assume API returns UCI or SAN; here we convert spaces after period)
         move_raw = m.get("san", m.get("uci", "")).replace(". ", ".")
+        # Prepend with move number
         if is_white_turn:
             move_str = f"{current_move_number}.{move_raw}"
         else:
             move_str = f"{current_move_number}...{move_raw}"
-        # Cast values to int to avoid formatting issues
-        w = int(m.get("white", 0))
-        d = int(m.get("draws", 0))
-        b = int(m.get("black", 0))
+        w = m.get("white", 0)
+        d = m.get("draws", 0)
+        b = m.get("black", 0)
         tot = w + d + b
         if tot > 0:
             wp = w / tot * 100
@@ -214,18 +215,15 @@ def print_moves_table(moves, current_move_number, is_white_turn):
             wp = dp = bp = 0
         print(f"{move_str:<12}{w:10d}{d:10d}{b:10d}{tot:10d} {wp:7.1f}% {dp:7.1f}% {bp:7.1f}%")
 
-def print_results(final_fen, moves_played, candidate_moves, board, args):
-    # Print only once—the file names are printed here.
+def print_results(final_fen, moves_played, candidate_moves, board):
     print("White:", args.white)
     print("Black:", args.black)
     print("Final FEN:", final_fen)
     print("\nMoves played to reach this position:")
     if moves_played:
         print(format_san_sequence(moves_played))
-        logging.debug("Moves played: %s", format_san_sequence(moves_played))
     else:
         print("(No moves played)")
-        logging.debug("No moves were played.")
     if board.is_checkmate():
         if board.turn == chess.WHITE:
             white_wins, draws, black_wins = 0, 0, 1
@@ -235,7 +233,6 @@ def print_results(final_fen, moves_played, candidate_moves, board, args):
         print("\nResult (Mate):")
         print(f"Overall: {white_wins}/{draws}/{black_wins} = {total} = "
               f"{white_wins*100:.1f}%/{draws*100:.1f}%/{black_wins*100:.1f}%")
-        logging.debug("Mate reached; simulation ended.")
         print("\n(Mate reached; no candidate moves table available.)")
     else:
         try:
@@ -243,7 +240,7 @@ def print_results(final_fen, moves_played, candidate_moves, board, args):
         except Exception as e:
             logging.debug("API request failed: %s", e)
             print("API request failed:", e)
-            sys.exit(1)
+            return
         if total > 0:
             overall_wp = white_wins / total * 100
             overall_dp = draws / total * 100
@@ -253,12 +250,12 @@ def print_results(final_fen, moves_played, candidate_moves, board, args):
         print("\nOverall Result from Lichess Explorer:")
         print(f"Overall: {white_wins}/{draws}/{black_wins} = {total} = "
               f"{overall_wp:.1f}%/{overall_dp:.1f}%/{overall_bp:.1f}%")
-        logging.debug("Overall API result: %d/%d/%d = %d", white_wins, draws, black_wins, total)
-        moves = api_data.get("moves", [])
-        if moves:
+        candidate_moves = api_data.get("moves", [])
+        if candidate_moves:
+            # Get current move number and whose turn from the final board state.
             current_move_number = board.fullmove_number
             is_white_turn = board.turn == chess.WHITE
-            print_moves_table(moves, current_move_number, is_white_turn)
+            print_moves_table(candidate_moves, current_move_number, is_white_turn)
             logging.debug("Candidate moves table printed.")
         else:
             print("No candidate moves available in the API response.")
@@ -268,6 +265,7 @@ def print_results(final_fen, moves_played, candidate_moves, board, args):
 # MAIN FUNCTION: PHASES 1, 2, & 3
 ##############################
 def main():
+    global args  # so that print_results() can use args.white and args.black
     parser = argparse.ArgumentParser(
         description="Opening Arena: Load repertoires (with variations), simulate a game, and query Lichess Explorer API."
     )
@@ -291,10 +289,11 @@ def main():
     board, san_sequence = simulate_game(white_tree, black_tree)
     final_fen = board.fen()
 
-    # Print file names, final FEN, and moves played (only once).
+    # Print basic game info
     print("White:", args.white)
     print("Black:", args.black)
     print("Final FEN:", final_fen)
+
     print("\nMoves played to reach this position:")
     if san_sequence:
         print(format_san_sequence(san_sequence))
@@ -303,7 +302,7 @@ def main():
         print("(No moves played)")
         logging.debug("No moves were played.")
 
-    # Phase 3: Query Lichess Explorer API (or print mate result).
+    # Phase 3: Query Lichess Explorer API or print mate result.
     if board.is_checkmate():
         if board.turn == chess.WHITE:
             white_wins, draws, black_wins = 0, 0, 1
@@ -334,6 +333,7 @@ def main():
         logging.debug("Overall API result: %d/%d/%d = %d", white_wins, draws, black_wins, total)
         moves = api_data.get("moves", [])
         if moves:
+            # Get current move number and turn from the board.
             current_move_number = board.fullmove_number
             is_white_turn = board.turn == chess.WHITE
             print_moves_table(moves, current_move_number, is_white_turn)
